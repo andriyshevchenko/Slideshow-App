@@ -5,7 +5,11 @@ function Slides({slides}) {
     const [index, updateIndex] = useState(0);
     const [slide, updateSlide] = useState(() => slides[index]);
 
-    const restart = () => updateSlide(slides[0]);
+    const restart = () => {
+        updateSlide(slides[0])
+        updateIndex(0); 
+     }
+ 
     const nextSlide = () => {
        updateSlide(slides[index + 1])
        updateIndex(index + 1); 
@@ -22,7 +26,7 @@ function Slides({slides}) {
     return (
         <div>
             <div id="navigation" className="text-center">
-                <button data-testid="button-restart" className="small outlined" onClick={restart}>Restart</button>
+                <button data-testid="button-restart" className="small outlined" disabled={isFirst} onClick={restart}>Restart</button>
                 <button data-testid="button-prev" className="small" disabled={isFirst} onClick={prevSlide}>Prev</button>
                 <button data-testid="button-next" className="small" disabled={isLast} onClick={nextSlide}>Next</button>
             </div>
